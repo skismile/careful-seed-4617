@@ -1,18 +1,26 @@
-import logo from './logo.svg';
+
 import './App.css';
-import { Button } from '@chakra-ui/react';
 import Navbar from './component/navbar';
-import Home from './router/home';
+
 import Footer from './component/footer';
+import Singup from './router/singup';
+import Login from './router/login';
+
+
+
+
 
 
 function App() {
-  
+  console.log("app")
 
   return (
     <div className="App">
+      
      <Navbar/>
-    <Home/>
+     
+   <Singup/>
+<Login/>
 <Footer/>
     </div>
   );
