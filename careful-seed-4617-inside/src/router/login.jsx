@@ -1,5 +1,6 @@
-import { Input, Stack,Button, Heading } from "@chakra-ui/react";
+import { Input, Stack,Button, Heading,Text } from "@chakra-ui/react";
 import { useContext, useState } from "react";
+import { useNavigate,Link } from "react-router-dom";
 import { Appcontext } from "../context/appcontext";
 
 export default function Login(){
@@ -12,7 +13,7 @@ const[loginData,setLoginData]=useState({
 })
 
 
-
+const navigate=useNavigate()
 function handleLogin(){
 // console.log(singup,loginData)
 // dispatch({type:"singupSuccess",payload:singUpData})
@@ -39,12 +40,13 @@ else{
 
 
 
-return <Stack w={'30%'} m="auto" >
+return <Stack  >
 <Heading>Login</Heading>
 <Input name="email" value={loginData.email} onChange={(e)=>setLoginData({...loginData,email:e.target.value})} placeholder="Enter Email" />
 <Input name="password" value={loginData.password} onChange={(e)=>setLoginData({...loginData,password:e.target.value})} placeholder="Enter Password" />
 <Button onClick={handleLogin}  colorScheme={'blue'} >Sing Up</Button>
-
+<Button onClick={()=>navigate(-1)}  >Back</Button>
+<Text>are you new User? <Link to='/' ><Text color={'blue'} >Click Here</Text></Link></Text>
 </Stack>
 
 

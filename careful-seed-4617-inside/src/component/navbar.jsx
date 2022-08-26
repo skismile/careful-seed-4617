@@ -1,6 +1,7 @@
-import { Stack ,Box,Text,Flex, Spacer,Image, Input, Button, MenuList, MenuButton,Menu,MenuItem, } from "@chakra-ui/react"
+import { Stack ,Box,Text,Flex, Spacer,Image, Input, Button, MenuList, MenuButton,Menu,MenuItem, Modal, } from "@chakra-ui/react"
 import {ChevronDownIcon} from "@chakra-ui/icons" 
 import styles from "./navbar.module.css"
+import Modaal from "../router/modal"
 
 
 
@@ -133,6 +134,7 @@ return <Stack>
 
 <Box border={'1px solid skyblue'}  p="0px 0px 0px 5px"  ><i className="fa-solid fa-magnifying-glass"></i><Input placeholder="What are you looking for?" border={'none'} outline={"none"}   /></Box>
 <Box>
+  <Modaal/>
 <Menu>
   <MenuButton className={styles.cont} bg="none" colorScheme='white'  color={"black"} as={Button} rightIcon={<ChevronDownIcon/>}>
     More
