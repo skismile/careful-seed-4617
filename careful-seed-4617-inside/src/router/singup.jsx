@@ -1,8 +1,9 @@
-import { Input, Stack,Button, Heading, useDisclosure, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, FormControl, FormLabel, ModalFooter, Modal,Text } from "@chakra-ui/react";
+import { Input, Stack,Button, Heading, useDisclosure,Box, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, FormControl, FormLabel, ModalFooter, Modal,Text, useToast } from "@chakra-ui/react";
 import { useContext, useRef, useState } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { Appcontext } from "../context/appcontext";
-import Allroutes from "./allroutes";
+
+import Login from "./login";
 
 export default function Singup(){
     const{dispatch,state}=useContext(Appcontext)
@@ -16,6 +17,8 @@ const navigate=useNavigate()
 const { isOpen, onOpen, onClose } = useDisclosure()
 const initialRef = useRef(null)
 const finalRef = useRef(null)
+const[login,setLogin]=useState(false)
+const toast = useToast()
 function handleSingup(){
 
     if(singUpData.name!=""&& singUpData.email!=""&& singUpData.password!="")
@@ -25,14 +28,30 @@ function handleSingup(){
         setSingUpData({  name:'',
         email:'',
         password:''})
-        
-        navigate('/login')
+        toast({
+            title: 'Account created.',
+            description: "We've created your account for you.",
+            status: 'success',
+            duration: 9000,
+            isClosable: true,
+            position:"top"
+          })
+
+        setLogin(true)
+       
     }
 
 }
 
+const handlegoToLogin=()=>{
+    setLogin(true)
+}
 
 
+if(login)
+{
+    return <Login/>
+}
 
 
 return <Stack >
@@ -42,7 +61,7 @@ return <Stack >
 <Input name="email" value={singUpData.email} onChange={(e)=>setSingUpData({...singUpData,email:e.target.value})} placeholder="Enter Email" />
 <Input name="password" value={singUpData.password} onChange={(e)=>setSingUpData({...singUpData,password:e.target.value})} placeholder="Enter Password" />
 <Button onClick={handleSingup}  colorScheme={'blue'} >Sing up </Button>
-<Text>already have account? <Link color="blue" to={'/login'} > <Text color={'blue'} >Login</Text> </Link>  </Text>
+<Box>already have account? <Text onClick={handlegoToLogin} color={'blue'} >Login</Text> </Box>
 </Stack>
 
 

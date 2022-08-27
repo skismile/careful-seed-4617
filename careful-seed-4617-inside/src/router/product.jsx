@@ -1,22 +1,23 @@
-import { Box,Button,Image,Select,SimpleGrid,Stack,Text,Option,Flex } from "@chakra-ui/react";
+import { Box,Button,Image,Select,SimpleGrid,Stack,Text,Option,Flex, Spinner,Skeleton, useToast } from "@chakra-ui/react";
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams, useSearchParams } from "react-router-dom";
 import { Appcontext } from "../context/appcontext";
 const url=`https://fakestoreapi.com/products/category/`
 
 const getData=(sort,category)=>{
     return axios.get(url+`${category}'s%20clothing`)
 }
-
 export default function Product(){
+    const params=useParams()
+    console.log(params)
 const [data,setData]=useState([])
 const[sort,setSort]=useState('asc')
-const[category,setCategory]=useState('men')
-
+const[category,setCategory]=useState(params.cat)
 const {state,dispatch}=useContext(Appcontext)
+const toast = useToast()
+// const[cartData,setCartData]=useState(cart)
 
-console.log(state.products)
     useEffect(()=>{
         dispatch({type:'loading'})
 getData(sort,category).then((res)=>{
@@ -77,13 +78,20 @@ else{
 }
 
 
+const handleCart=(ele)=>{
+    let cart=JSON.parse(localStorage.getItem('cart'))||[]
 
-
-
-if(state.loading)
-{
-    return <Text fontSize={'4xl'} >....loading</Text>
+localStorage.setItem('cart',JSON.stringify([...cart,ele]))
+toast({
+    title: "Item added is basket",
+    status: 'info',
+    isClosable: true,
+    position:'top'
+  })
 }
+
+
+
 
 
 
@@ -102,14 +110,23 @@ return <Stack p={'50px'} >
   <option value='desc'>High to Low</option>
 </Select>
 </Flex>
-<SimpleGrid  columns={2}  gap="10px"  border={'1px solid red'}   >
+
+{state.loading&&<Box fontSize={'4xl'} >loading <Spinner
+  thickness='4px'
+  speed='0.65s'
+  emptyColor='gray.200'
+  color='blue.500'
+  
+/>  </Box> }
+<SimpleGrid  columns={2}  gap="10px"     >
 
 {state.products.map((item)=>{
 
-return<Link to={`/product/${item.id}`} > <Box _hover={{
+return <Skeleton key={item.id} w="400px" m='auto' isLoaded={!state.loading} > 
+ <Box _hover={{
     boxShadow: "rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px"
-}} m={'auto'} p="5px" w="400px" h={'400px'}  key={item.id} boxShadow={"rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px"} >
-<Image  w={'100%'} h={'50%'} src={item.image}  />
+}} m={'auto'} p="5px" w="400px" h={'400px'}   boxShadow={"rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px"} >
+<Link to={`/product/${item.id}`} ><Image  w={'100%'} h={'50%'} src={item.image}  />
 <Text  fontWeight={'bold'} fontSize='xl' >{item.title}</Text>
 {/* <Text>{item.description}</Text> */}
 
@@ -117,8 +134,8 @@ return<Link to={`/product/${item.id}`} > <Box _hover={{
 <Text><b>${item.price}</b></Text>
 <Text><b>Ratings :</b> {item.rating.rate}</Text>
 {/* <Text>Totel Ratings : {item.rating.count}</Text>  */}
-  <Button bg={'#303AB2'} colorScheme={"blue"} color='white'  >ADD TO BASKET</Button>
-</Box></Link>
+</Link>
+<Button bg={'#303AB2'} onClick={()=>handleCart(item)} colorScheme={"blue"} color='white'  >ADD TO BASKET</Button></Box></Skeleton>
 
 })}
 
