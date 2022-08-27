@@ -1,13 +1,25 @@
-import { Stack ,Box,Text,Flex, Spacer,Image, Input, Button, MenuList, MenuButton,Menu,MenuItem, Modal, } from "@chakra-ui/react"
+import { Stack ,Box,Text,Flex, Spacer,Image, Input, Button, MenuList, MenuButton,Menu,MenuItem, Modal, SimpleGrid, } from "@chakra-ui/react"
 import {ChevronDownIcon} from "@chakra-ui/icons" 
 import styles from "./navbar.module.css"
 import Modaal from "../router/modal"
+import { Link, useNavigate } from "react-router-dom"
+import { useContext } from "react"
+import { Appcontext } from "../context/appcontext"
 
 
 
 export default function Navbar(){
-console.log(styles)
-return <Stack>
+// console.log(styles)
+
+
+const {state,dispatch}=useContext(Appcontext)
+const navigate=useNavigate()
+console.log('navbar',state)
+const handleLogout=()=>{
+  dispatch({type:'logout'})
+  navigate('/')
+}
+return <Stack  >
 
 <Flex  className={styles.topNav}   >
 <Box  w={"30%"}  >
@@ -49,10 +61,10 @@ return <Stack>
 
 
 
-<Box   className={styles.navCont} >
+<box p={'40px'}   className={styles.navCont} >
 <Box className={styles.check} w={"30%"} >
 <Box>
-    <Image src="https://www.landmarkgroup.com/qa/sites/default/files/Brand-logo/New%20Max%20Logo-%20Eng%20With%20Outline_1.png"/>
+    <Link to='/' ><Image src="https://www.landmarkgroup.com/qa/sites/default/files/Brand-logo/New%20Max%20Logo-%20Eng%20With%20Outline_1.png"/></Link>
 </Box>
 <Menu  >
   <MenuButton className={styles.cont} bg="none" colorScheme='white'  color={"black"} as={Button} rightIcon={<ChevronDownIcon/>}>
@@ -67,12 +79,12 @@ return <Stack>
   
   
   >
-    <MenuItem> <a href="https://www.maxfashion.in/in/en/search?q=%3AallCategories%3Amaxwomen-tops%3Abadge.title.en%3AONLINE%20ONLY">Tops</a> </MenuItem>
-    <MenuItem>Indian wear</MenuItem>
-    <MenuItem>Sports wear</MenuItem>
-    <MenuItem>Dresses</MenuItem>
-    <MenuItem>Bottom Wear</MenuItem>
-    <MenuItem>Sleepwear</MenuItem>
+   <Link to='/products/women' > <MenuItem>Tops</MenuItem></Link>
+   <Link to='/products/women' > <MenuItem>Indian wear</MenuItem></Link>
+   <Link to='/products/women' ><MenuItem>Sports wear</MenuItem></Link>
+   <Link to='/products/women' > <MenuItem>Dresses</MenuItem></Link>
+   <Link to='/products/women' > <MenuItem>Bottom Wear</MenuItem></Link>
+   <Link to='/products/women' ><MenuItem>Sleepwear</MenuItem></Link>
   </MenuList>
 </Menu>
 <Menu>
@@ -85,12 +97,12 @@ return <Stack>
     md:"600px",
     lg:'800px'
   }} >
-     <MenuItem>Tops</MenuItem>
-    <MenuItem>Indian wear</MenuItem>
-    <MenuItem>Sports wear</MenuItem>
-    <MenuItem>Dresses</MenuItem>
-    <MenuItem>Bottom Wear</MenuItem>
-    <MenuItem>Sleepwear</MenuItem>
+    <Link to='/products/men' ><MenuItem>Tops</MenuItem></Link>
+    <Link to='/products/men' ><MenuItem>Indian wear</MenuItem></Link>
+    <Link to='/products/men' ><MenuItem>Sports wear</MenuItem></Link>
+    <Link to='/products/men' ><MenuItem>Dresses</MenuItem></Link>
+    <Link to='/products/men' ><MenuItem>Bottom Wear</MenuItem></Link>
+    <Link to='/products/men' ><MenuItem>Sleepwear</MenuItem></Link>
   </MenuList>
 </Menu>
 <Menu>
@@ -103,12 +115,12 @@ return <Stack>
     md:"500px",
     lg:'700px'
   }} >
-    <MenuItem>Tops</MenuItem>
-    <MenuItem>Indian wear</MenuItem>
-    <MenuItem>Sports wear</MenuItem>
-    <MenuItem>Dresses</MenuItem>
-    <MenuItem>Bottom Wear</MenuItem>
-    <MenuItem>Sleepwear</MenuItem>
+   <Link to='/products/women' > <MenuItem>Tops</MenuItem></Link>
+   <Link to='/products/women' > <MenuItem>Indian wear</MenuItem></Link>
+   <Link to='/products/women' ><MenuItem>Sports wear</MenuItem></Link>
+   <Link to='/products/women' ><MenuItem>Dresses</MenuItem></Link>
+   <Link to='/products/women' ><MenuItem>Bottom Wear</MenuItem></Link>
+   <Link to='/products/women' ><MenuItem>Sleepwear</MenuItem></Link>
   </MenuList>
 </Menu>
 <Menu>
@@ -121,12 +133,12 @@ return <Stack>
     md:"400px",
     lg:'600px'
   }}  >
-    <MenuItem>Tops</MenuItem>
-    <MenuItem>Indian wear</MenuItem>
-    <MenuItem>Sports wear</MenuItem>
-    <MenuItem>Dresses</MenuItem>
-    <MenuItem>Bottom Wear</MenuItem>
-    <MenuItem>Sleepwear</MenuItem>
+    <Link to='/products/men' ><MenuItem>Tops</MenuItem></Link>
+    <Link to='/products/men' ><MenuItem>Indian wear</MenuItem></Link>
+    <Link to='/products/men' ><MenuItem>Sports wear</MenuItem></Link>
+    <Link to='/products/men' ><MenuItem>Dresses</MenuItem></Link>
+    <Link to='/products/men' ><MenuItem>Bottom Wear</MenuItem></Link>
+    <Link to='/products/men' ><MenuItem>Sleepwear</MenuItem></Link>
   </MenuList>
 </Menu>
 
@@ -134,7 +146,16 @@ return <Stack>
 
 <Box border={'1px solid skyblue'}  p="0px 0px 0px 5px"  ><i className="fa-solid fa-magnifying-glass"></i><Input placeholder="What are you looking for?" border={'none'} outline={"none"}   /></Box>
 <Box>
-  <Modaal/>
+{state.isAuth?<Menu>
+  <MenuButton  className={styles.cont} bg="none" colorScheme='white'  color={"black"} as={Button} rightIcon={<ChevronDownIcon/>} >hello! {state.email}</MenuButton>
+  <MenuList  >
+    <MenuItem>{state.email}</MenuItem>
+    <MenuItem onClick={handleLogout} >Logout</MenuItem>
+    <MenuItem>Account</MenuItem>
+    <MenuItem>wishlist</MenuItem>
+   
+  </MenuList>
+</Menu>:<Modaal/>}
 <Menu>
   <MenuButton className={styles.cont} bg="none" colorScheme='white'  color={"black"} as={Button} rightIcon={<ChevronDownIcon/>}>
     More
@@ -150,13 +171,13 @@ return <Stack>
   </MenuList>
 </Menu>
 {/* <Box> <Login/> </Box> */}
-<Box><i className="fa-solid fa-heart"></i></Box>
-<Box><i className="fa-solid fa-bag-shopping"></i> </Box>
+<Box  > <Link to='/cart' > <i style={{color:'red'}} className="fa-solid fa-heart"></i></Link></Box>
+<Box><Link to='/cart'> <i style={{color:'teal'}} className="fa-solid fa-bag-shopping"></i></Link> </Box>
 
 </Box>
 
 
-</Box>
+</box>
 
 
 </Stack>

@@ -1,7 +1,8 @@
-import { Box, SimpleGrid,Image,Text,Button, Flex, Spacer, Input } from "@chakra-ui/react";
+import { Box, SimpleGrid,Image,Text,Button, Flex, Spacer, Input,Skeleton, Spinner, useToast } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
 import axios from 'axios'
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { Appcontext } from "../context/appcontext";
 
 const getData=(id)=>{
 
@@ -9,22 +10,55 @@ const getData=(id)=>{
 
 }
 
+
 export default function SingleProduct(){
     const [data,setData]=useState({})
+    const {state,dispatch}=useContext(Appcontext)
+    const[cartbtnEffect,setCartbtnEffect]=useState(false)
+    const [addData,setAddData]=useState([])
+    const[count,setCount]=useState(0)
     const param=useParams()
+    const toast = useToast()
     useEffect(()=>{
+        dispatch({type:'loading'})
         getData(param.id).then((res)=>{
             setData(res.data)
-            console.log(res)
+            // console.log(res)
+
+            dispatch({type:'loded'})
         })
     },[])
+    const addCartHnadler=()=>{
+//         setCartbtnEffect(!cartbtnEffect)
 
+setTimeout(()=>{
+    setCartbtnEffect(false)
+},500)
+        // dispatch({type:"addingCart",payload:data})
+
+let arr=JSON.parse(localStorage.getItem('cart'))||[]
+        // console.log(dispatch)
+        // console.log("cartData",addData)
+        localStorage.setItem('cart',JSON.stringify([...arr,data]))
+        setCount(count+1)
+        toast({
+            title: 'Item Added in Cart',
+            description: "Please Check out to Cart page",
+            status: 'success',
+            duration: 9000,
+            isClosable: true,
+          })
+        }
+        console.log("cartData",state)
+        
 
 return <Box w={'70%'}m='auto' >
-    
-    <SimpleGrid    columns={2}  >
-<Box p={'20px'}  > <Image src={data.image}  /> </Box>
-<Box p={'30px'} >
+    {state.loading &&  <Text>..Loading</Text> }
+    <SimpleGrid  gap={'20px'}  columns={2}  >
+        <Skeleton isLoaded={!state.loading} >
+<Box p={'20px'}  > <Image src={data.image}  /> </Box></Skeleton>
+<Skeleton isLoaded={!state.loading}  >
+<Box textAlign={'left'} p={'30px'} >
 
 <Text> <b>{data.title} </b>  </Text>
 <Text> <b> Category : {data.category} </b>  </Text>
@@ -33,15 +67,15 @@ return <Box w={'70%'}m='auto' >
 <Text> <b> Totel Buyer of Rating : {data?.rating?.count} </b>  </Text>
 <Text> <b> Totel Buyer of Rating : {data.description} </b>  </Text>
  
-<Button bg={'#303AB2'} color='white' colorScheme={"blue"} >ADD TO BUTTON</Button>
+<Button bg={'#303AB2'} disabled={count==1} color='white' colorScheme={"blue"} onClick={addCartHnadler} >  {    cartbtnEffect?<Spinner/>:"ADD TO BUTTON"} </Button>
 <br/>
 <br />
 <Flex>
-    <Box><i class="fa-solid fa-heart-circle-plus"></i>  Add to Favourites</Box>
+    <Box><i className="fa-solid fa-heart-circle-plus"></i>  Add to Favourites</Box>
     <Spacer/>
-    <Box> <i class="fa-solid fa-share-nodes"></i> Share</Box>
+    <Box> <i className="fa-solid fa-share-nodes"></i> Share</Box>
 </Flex>
-    <Text><i class="fa-solid fa-truck"></i>  When will I receive my order?</Text>
+    <Text><i className="fa-solid fa-truck"></i>  When will I receive my order?</Text>
 <Flex>
     <Input placeholder={'enter your pin code'} /><Button bg={'#303AB2'} color='white' colorScheme={"blue"}  >Check</Button>
 </Flex>
@@ -68,7 +102,7 @@ over view
     
 </ul></Box>
 
-</Box>
+</Box></Skeleton>
 
 
     </SimpleGrid>

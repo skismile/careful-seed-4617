@@ -1,7 +1,7 @@
 import { Input, Stack,Button, Heading, useDisclosure, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, FormControl, FormLabel, ModalFooter, Modal } from "@chakra-ui/react";
 import { useContext, useRef, useState } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
-import LoginRoutes from "./loginroutes";
+
 import Singup from "./singup";
 
 
@@ -23,14 +23,14 @@ return <>
       >
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Create your account</ModalHeader>
+       
           <ModalCloseButton />
           <ModalBody pb={6}>
        
 
 
 
-<LoginRoutes/>
+<Singup/>
 
           </ModalBody>
 
