@@ -45,7 +45,7 @@ if(count>0)
 else{
     toast({
         title: 'error.',
-        description: "Please valid user id and password !",
+        description: "Please enter valid user id and password !",
         duration: 9000,
         isClosable: true,
         position:"top",
