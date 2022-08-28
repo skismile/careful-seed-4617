@@ -10,11 +10,12 @@ const getData=(sort,category)=>{
 }
 export default function Product(){
     const params=useParams()
-    console.log(params)
+    // console.log(params)
 const [data,setData]=useState([])
 const[sort,setSort]=useState('asc')
 const[category,setCategory]=useState(params.cat)
 const {state,dispatch}=useContext(Appcontext)
+const [error,setError]=useState(false)
 const toast = useToast()
 // const[cartData,setCartData]=useState(cart)
 
@@ -24,7 +25,12 @@ getData(sort,category).then((res)=>{
     // setData(res.data)
     // console.log(res.data)
     dispatch({type:'getproducts',payload:res.data})
+    setError(false)
+}).catch((err)=>{
+    setError(true)
 })
+
+    window.document.title='Product page'   
 
     },[category])
 
@@ -93,10 +99,12 @@ toast({
 
 
 
-
-
+if(error)
+{
+    return <Text fontSize={'4xl'} >Something Went wrong!!!</Text>
+}
 return <Stack p={'50px'} >
-<Flex w={'30%'} >
+<Flex w={{base:"100%",sm:'100%',md:'70%',lg:'50%',xl:'50%'}} m='auto'  >
 <Select onChange={handleSort} placeholder='Sort By Price'>
   <option value='asc'>Low to High</option>
   <option value='desc'>High to Low</option>
@@ -118,7 +126,7 @@ return <Stack p={'50px'} >
   color='blue.500'
   
 />  </Box> }
-<SimpleGrid  columns={2}  gap="10px"     >
+<SimpleGrid  columns={{base:1, sm:1,md:1,lg:2}}  gap="10px"     >
 
 {state.products.map((item)=>{
 

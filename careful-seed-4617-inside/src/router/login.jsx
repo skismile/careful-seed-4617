@@ -8,7 +8,7 @@ export default function Login(){
     const{dispatch,state}=useContext(Appcontext)
     const[singupback,setSingup]=useState(false)
     const toast = useToast()
-    console.log(state)
+    // console.log(state)
     const singup=state.singupData
 const[loginData,setLoginData]=useState({
     email:'',
@@ -29,7 +29,8 @@ for(let i=0;i<singup.length;i++)
     }
 }
 if(count>0)
-{console.log(loginData)
+{
+    // console.log(loginData)
     dispatch({type:'loginSuccess',payload:{...loginData}})
     toast({
         title: 'Login Success.',

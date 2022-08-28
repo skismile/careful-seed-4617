@@ -1,5 +1,5 @@
 import { Box,Flex,SimpleGrid,Spacer,Text,Image,Button  } from "@chakra-ui/react";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { Appcontext } from "../context/appcontext";
 
@@ -20,17 +20,21 @@ setCartData([...newData])
 
 
 }
+useEffect(()=>{
+    window.document.title='Cart page'   
+},[])
 
-
-return <Box textAlign='left' w={'70%'} m='auto' >
-<Box fontSize={'4xl'} borderBottom={'1px solid gray'}  textAlign='left' >Your Shopping Basket</Box>
+return <Box textAlign='left' w={'80%'} m='auto' >
+<Box  fontSize={{base:'xl',sm:'xl',md:'2xl',lg:'4xl'}} borderBottom={'1px solid gray'}  textAlign='left' >Your Shopping Basket</Box>
 <Text><b>{cartdata.length} Product</b></Text>
-{ cartdata.length>0&& <Flex  gap={'30px'} >
+{ cartdata.length>0&& <SimpleGrid columns={{
+    base:1,sm:1,md:1,lg:2,xl:2
+}} gap={'30px'} >
 
-<Box w={'70%'}    >
+<Box      >
 
 {cartdata.map((ele,i)=>{
-    return  <Flex key={Date.now().toString()+i} borderBottom={'1px solid gray'}  mt='50px' alignItems={'center'} gap='20px'  >
+    return  <Flex  fontSize={{base:'sm'}} key={Date.now().toString()+i} borderBottom={'1px solid gray'}  mt='50px' alignItems={'center'} gap='20px'  >
 <Box h={'200px'} > <Image h={'100%'} w='100%'  src={ele.image} /></Box>
 <Box >
     <Text> <b>{ele.title}</b> </Text>
@@ -45,7 +49,7 @@ return <Box textAlign='left' w={'70%'} m='auto' >
 
 </Box>
 
-<Box w={'30%'}  p='20px'>
+<Box   p='20px'>
     <Box border={'1px solid gray'} w='100%' p={'30px'} >
 <Box display={'flex'}  >
     <Text fontSize={'xl'} >Total MRP</Text>
@@ -84,7 +88,7 @@ return acc+ele.price
 
 </Box>
 </Box>
-</Flex>}
+</SimpleGrid>}
 
 
 </Box>
