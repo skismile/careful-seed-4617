@@ -7,7 +7,7 @@ import Login from "./login";
 
 export default function Singup(){
     const{dispatch,state}=useContext(Appcontext)
-    console.log(dispatch,state)
+    // console.log(dispatch,state)
 const[singUpData,setSingUpData]=useState({
     name:'',
     email:'',
@@ -23,7 +23,7 @@ function handleSingup(){
 
     if(singUpData.name!=""&& singUpData.email!=""&& singUpData.password!="")
     {
-        console.log(singUpData)
+        // console.log(singUpData)
         dispatch({type:"singupSuccess",payload:singUpData})
         setSingUpData({  name:'',
         email:'',

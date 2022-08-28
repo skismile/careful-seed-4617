@@ -1,4 +1,4 @@
-import { Stack ,Box,Text,Flex, Spacer,Image, Input, Button, MenuList, MenuButton,Menu,MenuItem, Modal, SimpleGrid, } from "@chakra-ui/react"
+import { Stack ,Box,Text,Flex, Spacer,Image, Input, Button, MenuList, MenuButton,Menu,MenuItem,SimpleGrid, } from "@chakra-ui/react"
 import {ChevronDownIcon} from "@chakra-ui/icons" 
 import styles from "./navbar.module.css"
 import Modaal from "../router/modal"
@@ -9,20 +9,19 @@ import { Appcontext } from "../context/appcontext"
 
 
 export default function Navbar(){
-// console.log(styles)
-
-
 const {state,dispatch}=useContext(Appcontext)
 const navigate=useNavigate()
-console.log('navbar',state)
+// console.log('navbar',state)
 const handleLogout=()=>{
   dispatch({type:'logout'})
   navigate('/')
 }
-return <Stack  >
+return <Box  >
 
 <Flex  className={styles.topNav}   >
-<Box  w={"30%"}  >
+<Box fontSize={'sm'}  w={{
+  base:'60%',sm:'60%',md:'50%',lg:'50%'
+}}  >
     <Flex>
 
     <Text  ><i className="fa-solid fa-truck"></i>  Free Shipping</Text>
@@ -60,9 +59,10 @@ return <Stack  >
 
 
 
+{/* //////////////////////////////////////////////////////////////// */}
 
-<box p={'40px'}   className={styles.navCont} >
-<Box className={styles.check} w={"30%"} >
+<SimpleGrid className={styles.navCont} columns={{base:1,sm:1,md:1,lg:3}}   >
+<Box className={styles.check}  >
 <Box>
     <Link to='/' ><Image src="https://www.landmarkgroup.com/qa/sites/default/files/Brand-logo/New%20Max%20Logo-%20Eng%20With%20Outline_1.png"/></Link>
 </Box>
@@ -177,10 +177,10 @@ return <Stack  >
 </Box>
 
 
-</box>
+</SimpleGrid>
 
 
-</Stack>
+</Box>
 
 
 

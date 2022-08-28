@@ -10,7 +10,7 @@ export default function Checkout(){
     let init=JSON.parse(localStorage.getItem('cart'))||[]
     const[data,setData]=useState(init)
     const toast = useToast()
-    console.log(data)
+    // console.log(data)
     const navigate=useNavigate()
     const setPayment=()=>{
 
@@ -25,11 +25,13 @@ localStorage.setItem('cart',JSON.stringify([]))
           navigate('/')
 
     }
-return <Box padding={'50px'} >
+return <Box  >
 
-<Flex  w={'80%'} m='auto' >
+<SimpleGrid border={'1px solid blue'} columns={{base:1,sm:1,md:2,lg:2}}  w={{
+    base:"100%",sm:'100%',md:"80%",lg:'80%' 
+}}  m='auto' >
 
-<Box w={'60%'}   border='1px solid gray' >
+<Box    border='1px solid gray' >
 
 <Text fontSize={'3xl'} >Select a payment method</Text>
 <hr />
@@ -53,15 +55,15 @@ return <Box padding={'50px'} >
 
 
 {/* //////////////////////////////////////////////////////// */}
-<Spacer/>
-<Box p={'30px'} w={'30%'}   border='1px solid gray' >
+
+<Box p={'30px'}    border='1px solid gray' >
 <Text fontSize={'xl'} ><b>Your order summary</b></Text>
 <hr />
 <br />
 {data.map((ele,i)=>{
-return <Flex alignItems={'center'}  h={'150px'} borderBottom={'1px solid gray'} key={Date.now().toString()+i} >
-    <Box w={'30%'}  ><Image h={'100%'} w='100%'  src={ele.image} /></Box>
-    <Box><Text>{ele.title}</Text><Text>price: {ele.price}</Text></Box>
+return <Flex alignItems={'center'} gap='30px'  h={'150px'} borderBottom={'1px solid gray'} key={Date.now().toString()+i} >
+    <Box  h={'100px'}  w={'30%'}  ><Image h={'100%'} w='100%'  src={ele.image} /></Box>
+    <Box h={'100px'}     ><Text>{ele.title}</Text><Text>price: {ele.price}</Text></Box>
    
 </Flex>
 
@@ -85,7 +87,7 @@ return acc+ele.price
 
 
 
-</Flex>
+</SimpleGrid>
 
 </Box>
 

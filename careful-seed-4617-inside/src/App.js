@@ -14,7 +14,7 @@ import Modaal from './router/modal';
 
 
 function App() {
-  console.log("app")
+
 
   return (
     <div className="App">

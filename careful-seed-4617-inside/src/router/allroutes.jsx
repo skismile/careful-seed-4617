@@ -18,6 +18,7 @@ return <Routes>
 <Route path="/cart" element={<Cart/>}  />
 <Route path="/checkout" element={<PrivateRoute><Checkout/></PrivateRoute>}  />
 <Route path="/login" element={<Login/>}  />
+<Route path="/singup" element={<Singup/>}  />
 
 
 

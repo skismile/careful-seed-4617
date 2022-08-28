@@ -5,7 +5,7 @@ import { Appcontext } from "../context/appcontext"
 export default function PrivateRoute({children}){
 
 const {state}=useContext(Appcontext)
-console.log(state)
+// console.log(state)
 const navigate=useNavigate()
 if(!state.isAuth)
 {
