@@ -1,8 +1,14 @@
-import { Box, Stack,Image, SimpleGrid } from "@chakra-ui/react";
+import { Box, Stack,Image, SimpleGrid,Text } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
+
 import Product from "./product";
 
 export default function Home(){
-
+    const [load,setLoad]=useState(true)
+    useEffect(()=>{
+        window.document.title='Home page'   
+       
+    },[])
 const carousel=["https://www.maxfashion.in/in/en/c/maxwomen-sportswear"]
 
 return <Stack w={'80%'} p='20px'  m='auto' >

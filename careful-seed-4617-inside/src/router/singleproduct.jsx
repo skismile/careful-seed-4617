@@ -15,7 +15,7 @@ export default function SingleProduct(){
     const [data,setData]=useState({})
     const {state,dispatch}=useContext(Appcontext)
     const[cartbtnEffect,setCartbtnEffect]=useState(false)
-    const [addData,setAddData]=useState([])
+   const[error,setError]=useState(false)
     const[count,setCount]=useState(0)
     const param=useParams()
     const toast = useToast()
@@ -24,13 +24,18 @@ export default function SingleProduct(){
         getData(param.id).then((res)=>{
             setData(res.data)
             // console.log(res)
-
+setError(false)
             dispatch({type:'loded'})
+        }).catch((err)=>{
+            setError(true)
         })
+    
+            window.document.title='Single product'   
+   
     },[])
     const addCartHnadler=()=>{
 //         setCartbtnEffect(!cartbtnEffect)
-
+setCartbtnEffect(false)
 setTimeout(()=>{
     setCartbtnEffect(false)
 },500)
@@ -52,6 +57,12 @@ let arr=JSON.parse(localStorage.getItem('cart'))||[]
         console.log("cartData",state)
         
 
+if(error)
+{
+    return <Text fontSize={'4xl'} >Something Went wrong!!!</Text>
+
+}
+
 return <Box w={'70%'}m='auto' >
     {state.loading &&  <Text>..Loading</Text> }
     <SimpleGrid  gap={'20px'}  columns={2}  >
@@ -67,7 +78,7 @@ return <Box w={'70%'}m='auto' >
 <Text> <b> Totel Buyer of Rating : {data?.rating?.count} </b>  </Text>
 <Text> <b> Totel Buyer of Rating : {data.description} </b>  </Text>
  
-<Button bg={'#303AB2'} disabled={count==1} color='white' colorScheme={"blue"} onClick={addCartHnadler} >  {    cartbtnEffect?<Spinner/>:"ADD TO BUTTON"} </Button>
+<Button bg={'#303AB2'} disabled={count==1} color='white' colorScheme={"blue"} onClick={addCartHnadler} >  {    cartbtnEffect?<Spinner/>:"ADD TO BASKET"} </Button>
 <br/>
 <br />
 <Flex>

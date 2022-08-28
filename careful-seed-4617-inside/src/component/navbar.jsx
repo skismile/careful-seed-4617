@@ -16,9 +16,9 @@ const handleLogout=()=>{
   dispatch({type:'logout'})
   navigate('/')
 }
-return <Box  >
+return <Stack w={'100%'}  >
 
-<Flex  className={styles.topNav}   >
+<Flex  className={styles.topNav}    >
 <Box fontSize={'sm'}  w={{
   base:'60%',sm:'60%',md:'50%',lg:'50%'
 }}  >
@@ -180,7 +180,7 @@ return <Box  >
 </SimpleGrid>
 
 
-</Box>
+</Stack>
 
 
 

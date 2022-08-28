@@ -1,5 +1,5 @@
 import { Box,Flex,Spacer,Text,Image,Stack, SimpleGrid, Button, Checkbox, useToast } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 
@@ -25,6 +25,9 @@ localStorage.setItem('cart',JSON.stringify([]))
           navigate('/')
 
     }
+    useEffect(()=>{
+        window.document.title='Payment page'   
+    },[])
 return <Box  >
 
 <SimpleGrid border={'1px solid blue'} columns={{base:1,sm:1,md:2,lg:2}}  w={{

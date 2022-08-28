@@ -15,6 +15,7 @@ const [data,setData]=useState([])
 const[sort,setSort]=useState('asc')
 const[category,setCategory]=useState(params.cat)
 const {state,dispatch}=useContext(Appcontext)
+const [error,setError]=useState(false)
 const toast = useToast()
 // const[cartData,setCartData]=useState(cart)
 
@@ -24,7 +25,12 @@ getData(sort,category).then((res)=>{
     // setData(res.data)
     // console.log(res.data)
     dispatch({type:'getproducts',payload:res.data})
+    setError(false)
+}).catch((err)=>{
+    setError(true)
 })
+
+    window.document.title='Product page'   
 
     },[category])
 
@@ -93,10 +99,12 @@ toast({
 
 
 
-
-
+if(error)
+{
+    return <Text fontSize={'4xl'} >Something Went wrong!!!</Text>
+}
 return <Stack p={'50px'} >
-<Flex w={{base:"100%",xsm:'100%',sm:'100%',md:'70%',lg:'50%',xl:'50%'}} m='auto'  >
+<Flex w={{base:"100%",sm:'100%',md:'70%',lg:'50%',xl:'50%'}} m='auto'  >
 <Select onChange={handleSort} placeholder='Sort By Price'>
   <option value='asc'>Low to High</option>
   <option value='desc'>High to Low</option>

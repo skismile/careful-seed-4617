@@ -1,5 +1,5 @@
 import { Box,Flex,SimpleGrid,Spacer,Text,Image,Button  } from "@chakra-ui/react";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { Appcontext } from "../context/appcontext";
 
@@ -20,7 +20,9 @@ setCartData([...newData])
 
 
 }
-
+useEffect(()=>{
+    window.document.title='Cart page'   
+},[])
 
 return <Box textAlign='left' w={'80%'} m='auto' >
 <Box  fontSize={{base:'xl',sm:'xl',md:'2xl',lg:'4xl'}} borderBottom={'1px solid gray'}  textAlign='left' >Your Shopping Basket</Box>
