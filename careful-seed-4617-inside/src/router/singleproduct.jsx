@@ -78,7 +78,7 @@ return <Box w={'70%'}m='auto' >
 <Text> <b> Totel Buyer of Rating : {data?.rating?.count} </b>  </Text>
 <Text> <b> Totel Buyer of Rating : {data.description} </b>  </Text>
  
-<Button bg={'#303AB2'} disabled={count==1} color='white' colorScheme={"blue"} onClick={addCartHnadler} >  {    cartbtnEffect?<Spinner/>:"ADD TO BASKET"} </Button>
+<Button bg={'#303AB2'} disabled={count==1} color='white' colorScheme={"blue"} onClick={addCartHnadler} > ADD TO BASKET </Button>
 <br/>
 <br />
 <Flex>
