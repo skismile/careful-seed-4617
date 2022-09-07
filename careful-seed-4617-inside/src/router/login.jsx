@@ -4,7 +4,7 @@ import { useNavigate,Link } from "react-router-dom";
 import { Appcontext } from "../context/appcontext";
 import Singup from "./singup";
 
-export default function Login(){
+export default function Login({w='30%'}){
     const{dispatch,state}=useContext(Appcontext)
     const[singupback,setSingup]=useState(false)
     const toast = useToast()
@@ -67,7 +67,7 @@ if(singupback)
     return <Singup/>
 }
 
-return <Stack  >
+return <Stack w={w} m='auto' >
 <Heading>Login</Heading>
 <Input name="email" value={loginData.email} onChange={(e)=>setLoginData({...loginData,email:e.target.value})} placeholder="Enter Email" />
 <Input name="password" value={loginData.password} onChange={(e)=>setLoginData({...loginData,password:e.target.value})} placeholder="Enter Password" />

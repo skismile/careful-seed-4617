@@ -50,7 +50,7 @@ const handlegoToLogin=()=>{
 
 if(login)
 {
-    return <Login/>
+    return <Login w='100%' />
 }
 
 

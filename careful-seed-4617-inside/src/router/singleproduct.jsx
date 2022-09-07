@@ -5,7 +5,7 @@ import { useContext, useEffect, useState } from "react";
 import { Appcontext } from "../context/appcontext";
 
 const getData=(id)=>{
-
+ 
   return  axios.get(`https://fakestoreapi.com/products/${id}`)
 
 }
