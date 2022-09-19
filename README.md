@@ -1,7 +1,3 @@
-# careful-seed-4617
-## 
-
-Masai_Unit4_Project
 
 
 ###  lookalike of website <span>maxfashion Clone<span>
@@ -33,9 +29,9 @@ Max offers apparel, footwear and accessories for the entire family - women, men 
 
 ---
 
-### Netlify Link
+### Vercel deploy Link
  
-https://cloneshephora.netlify.app
+https://careful-seed-4617-inside-skismile75-gmailcom.vercel.app
 
 
 
@@ -84,9 +80,9 @@ can Signup and Login to buy the courses.
 
 ------
 
-### Netlify Link
-
-https://cloneshephora.netlify.app
+### Vercel deploy Link
+ 
+https://careful-seed-4617-inside-skismile75-gmailcom.vercel.app
 ------
  
 <h1>WEBSITE USER FLOW ></h1>
