@@ -89,10 +89,8 @@ https://careful-seed-4617-inside-skismile75-gmailcom.vercel.app
 
 ### About Project
 
-> We did this project within 5 days in our unit-3 construct week.
-We have also add some cool functionality in our courses page where 
-you can filter and sort the courses according to your choice and user
-can Signup and Login to buy the courses.
+> T did this project within 5 days in my construct week.
+
 
 ---
 
