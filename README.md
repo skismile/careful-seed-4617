@@ -1,6 +1,6 @@
 
 
-###  lookalike of website <span>maxfashion Clone<span>
+###   website <span>maxfashion Clone<span>
 <h2>Welcome to this repo</h2>
 
 I completed the task in 5 days and Given my
