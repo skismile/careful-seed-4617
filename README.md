@@ -109,4 +109,4 @@ https://careful-seed-4617-inside-skismile75-gmailcom.vercel.app
 the user flow that we tried to maintain is,
 <br/>
 home -> login/signup -> dashboard -> get started to products -> create user Id-> Enter email details -> 
-choose products -> Product detail page-> -> Products Check out page ->payment status -> order placed -> track status.
+choose products ->Cart page -> Product detail page-> -> Products Check out page -> order placed.
